@@ -1,7 +1,7 @@
 ﻿
 # 脚本使用方法
 
-**关于该脚本的详细介绍，请参考作者博客文章：[如何制作一个AWS EMR客户端节点（ Client Node / Edge Node / Gateway Node )]（https://laurence.blog.csdn.net/article/details/108529087）**
+**关于该脚本的详细介绍，请参考作者博客文章：[如何制作一个AWS EMR客户端节点（ Client Node / Edge Node / Gateway Node )](https://laurence.blog.csdn.net/article/details/108529087)**
 
 检出后需要先给shell文件`make-emr-edge-node.sh`添加可执行属性：
 
