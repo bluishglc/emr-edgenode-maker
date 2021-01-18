@@ -55,7 +55,7 @@ init() {
   masterNode="$2"
   chmod 600 "$pemFile"
   makeYumRepo "$pemFile" "$masterNode"
-  yum -y install vim wget zip unzip expect tree htop iotop nc telnet lrzsz openssl-devel emrfs emr-ddb emr-goodies emr-kinesis emr-s3-select emr-scripts
+  yum -y install vim wget zip unzip expect tree htop iotop nc telnet lrzsz openssl-devel emrfs emr-ddb emr-goodies emr-kinesis emr-s3-select emr-scripts emr-puppet
   makeHadoopUser "$pemFile"
   makeDir
   makeJdk
@@ -96,8 +96,7 @@ makeHadoopUser() {
 makeYumRepo() {
   pemFile="$1"
   masterNode="$2"
-  scp -o StrictHostKeyChecking=no -i $pemFile hadoop@$masterNode:/etc/yum.repos.d/emr-apps.repo .
-  mv emr-apps.repo /etc/yum.repos.d/emr-apps.repo
+  scp -o StrictHostKeyChecking=no -i $pemFile hadoop@$masterNode:/etc/yum.repos.d/*.repo /etc/yum.repos.d/
   scp -o StrictHostKeyChecking=no -i $pemFile hadoop@$masterNode:/var/aws/emr/repoPublicKey.txt .
   mkdir -p /var/aws/emr/
   mv repoPublicKey.txt /var/aws/emr/repoPublicKey.txt
