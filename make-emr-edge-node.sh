@@ -99,7 +99,7 @@ makeYumRepo() {
   scp -o StrictHostKeyChecking=no -i $pemFile hadoop@$masterNode:/etc/yum.repos.d/emr-apps.repo .
   mv emr-apps.repo /etc/yum.repos.d/emr-apps.repo
   scp -o StrictHostKeyChecking=no -i $pemFile hadoop@$masterNode:/etc/yum.repos.d/emr-platform.repo .
-  mv emr-apps.repo /etc/yum.repos.d/emr-platform.repo
+  mv emr-platform.repo /etc/yum.repos.d/emr-platform.repo
   scp -o StrictHostKeyChecking=no -i $pemFile hadoop@$masterNode:/var/aws/emr/repoPublicKey.txt .
   mkdir -p /var/aws/emr/
   mv repoPublicKey.txt /var/aws/emr/repoPublicKey.txt
