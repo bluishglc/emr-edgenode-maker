@@ -98,6 +98,8 @@ makeYumRepo() {
   masterNode="$2"
   scp -o StrictHostKeyChecking=no -i $pemFile hadoop@$masterNode:/etc/yum.repos.d/emr-apps.repo .
   mv emr-apps.repo /etc/yum.repos.d/emr-apps.repo
+  scp -o StrictHostKeyChecking=no -i $pemFile hadoop@$masterNode:/etc/yum.repos.d/emr-platform.repo .
+  mv emr-apps.repo /etc/yum.repos.d/emr-platform.repo
   scp -o StrictHostKeyChecking=no -i $pemFile hadoop@$masterNode:/var/aws/emr/repoPublicKey.txt .
   mkdir -p /var/aws/emr/
   mv repoPublicKey.txt /var/aws/emr/repoPublicKey.txt
@@ -139,7 +141,7 @@ makeHiveClient() {
 makeSparkClient() {
   pemFile="$1"
   masterNode="$2"
-  yum -y install spark-core spark-python spark-datanucleus
+  yum -y install spark-core spark-python spark-datanucleus emr-goodies-spark spark-external hudi-spark
   rsync -avz --delete -e "ssh -o StrictHostKeyChecking=no -o ServerAliveInterval=10 -i $pemFile" hadoop@$masterNode:'/etc/spark/conf/*' /etc/spark/conf
   echo "spark.hadoop.yarn.timeline-service.enabled false" | tee -a /etc/spark/conf/spark-defaults.conf
   mkdir -p /var/log/spark/user
